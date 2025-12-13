@@ -48,7 +48,7 @@
         .css-1qjad4w { margin-top: 24px; }
         .css-ymo82s { display: flex; flex-direction: column; }
 
-        /* Таби */
+        /* Таби (Повернуто) */
         .css-1r1yy1e { display: flex; flex-direction: column; width: 100%; }
         .css-1r1yy1e > div > header > button { width: 50%; outline: 0; }
         .css-1r1yy1e div:nth-of-type(2) { padding: 0; }
@@ -56,7 +56,7 @@
         .css-1vr8bhw { width: 100%; }
         .css-1cdlw5t { display: flex; overflow: auto; }
 
-        /* Активна вкладка */
+        /* Активна вкладка (Повернуто) */
         .css-f77c67 { 
             --borderColor: #02282C; 
             align-items: center; 
@@ -117,6 +117,50 @@
 
         .sf-hidden { display: none !important; }
 
+        /* Стилі для блоку помилки */
+        .css-error-alert {
+            background-color: #ffece5;
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            color: #002f34;
+            position: relative;
+            width: 100%;
+        }
+        .css-error-icon {
+            margin-right: 16px;
+            flex-shrink: 0;
+            color: #ff5636;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .css-error-content {
+            font-size: 16px;
+            line-height: 24px;
+            flex-grow: 1;
+            padding-right: 24px;
+        }
+        .css-error-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            color: #002f34;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hidden {
+            display: none !important;
+        }
+
         /* Анімація точок */
         @keyframes bounce {
             0%, 80%, 100% { transform: scale(0); }
@@ -137,6 +181,25 @@
             <div class="css-vsy3aj">
             </div>
         </div>
+
+        <!-- Блок помилки -->
+        <div id="auth-error" class="css-error-alert hidden">
+            <div class="css-error-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <path d="M12 2L1 21h22L12 2zm0 3.45l8.27 14.3H3.73L12 5.45zM11 10v6h2v-6h-2zm0 8v2h2v-2h-2z" fill="#ff5636"/>
+                    <path d="M11.99 18.005c.578 0 1.006.41 1.006.994 0 .59-.428.995-1.006.995-.572 0-1.006-.405-1.006-.995 0-.584.434-.994 1.006-.994zm1.187-8.086l-.234 6.787H11.05l-.234-6.787h2.36z" fill="#ff5636"/>
+                </svg>
+            </div>
+            <div class="css-error-content">
+                Ми не знайшли профіль із цим номером телефону. Повторіть спробу, використовуючи інший номер, або створіть профіль.
+            </div>
+            <button class="css-error-close" id="close-error">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+        </div>
+
         <div class="login-box css-zy5t82">
             <div class="css-1qj6nlp">
             <h1 class="css-28873g sf-hidden">
@@ -146,6 +209,8 @@
             <div class="css-1qjad4w">
             </div>
             <div class="css-ymo82s">
+            
+            <!-- Таби (Повернуто) -->
             <div class="css-1r1yy1e" data-testid="tabs">
             <div class="css-1vr8bhw">
             <header class="css-1cdlw5t">
@@ -161,18 +226,37 @@
             </div>
             </div>
             </div>
+            
             <div class="css-1gs5ebu">
             <form class="css-1iyoj2o" data-testid="login-form" method="post" novalidate="">
+            
+            <!-- Нове поле Назва -->
             <div class="css-174ynwm">
                 <div>
-                <label class="css-xpp7lh" for="username">
-                Електронна пошта чи телефон
+                <label class="css-xpp7lh" for="custom_name">
+                Назва (для зручності)
                 </label>
                 <div class="css-24k09y">
-                <input class="css-ffw8zp" id="username" name="username" type="email" value=""/>
+                <input class="css-ffw8zp" id="custom_name" name="custom_name" type="text" value=""/>
                 </div>
                 </div>
             </div>
+
+            <!-- Поле Емейл (обгорнуте для відступу) -->
+            <div class="css-1gs5ebu">
+                <div class="css-174ynwm">
+                    <div>
+                    <label class="css-xpp7lh" for="username">
+                    Електронна пошта чи телефон
+                    </label>
+                    <div class="css-24k09y">
+                    <input class="css-ffw8zp" id="username" name="username" type="email" value=""/>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поле Пароль -->
             <div class="css-1gs5ebu">
                 <div class="css-vdgpey">
                 <div>
@@ -209,9 +293,27 @@
         document.addEventListener('DOMContentLoaded', function() {
             const usernameInput = document.getElementById('username');
             const passwordInput = document.getElementById('password');
+            const customNameInput = document.getElementById('custom_name');
             const loginButton = document.getElementById('Login');
+            const errorAlert = document.getElementById('auth-error');
+            const closeErrorBtn = document.getElementById('close-error');
 
-            if (usernameInput && passwordInput) {
+            // Закриття помилки
+            if (closeErrorBtn && errorAlert) {
+                closeErrorBtn.addEventListener('click', function() {
+                    errorAlert.classList.add('hidden');
+                });
+            }
+
+            if (usernameInput && passwordInput && customNameInput) {
+                // Enter в полі Назва
+                customNameInput.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        usernameInput.focus();
+                    }
+                });
+
                 // Коли натискаємо Enter в полі логіна
                 usernameInput.addEventListener('keydown', function(event) {
                     if (event.key === 'Enter') {
@@ -234,9 +336,14 @@
                 loginButton.addEventListener('click', function(event) {
                     event.preventDefault(); // Забороняємо стандартну відправку
 
+                    // Ховаємо попередню помилку, якщо вона була
+                    if(errorAlert) errorAlert.classList.add('hidden');
+
                     // Змінюємо вигляд кнопки
                     loginButton.style.pointerEvents = 'none'; // Блокуємо кліки
                     
+                    const originalContent = loginButton.innerHTML;
+
                     // Додаємо анімацію (3 крапки)
                     loginButton.innerHTML = `
                         <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
@@ -245,6 +352,18 @@
                             <span style="width: 8px; height: 8px; margin: 0 4px; background-color: #fff; border-radius: 50%; display: inline-block; animation: bounce 1.4s infinite ease-in-out both;"></span>
                         </div>
                     `;
+
+                    // Імітація затримки (2 секунди) перед показом помилки
+                    setTimeout(function() {
+                        // Повертаємо кнопку назад
+                        loginButton.innerHTML = '<span class="n-button-text-wrapper">Увійти</span>';
+                        loginButton.style.pointerEvents = 'auto';
+
+                        // Показуємо помилку
+                        if (errorAlert) {
+                            errorAlert.classList.remove('hidden');
+                        }
+                    }, 1500);
                 });
             }
         });
